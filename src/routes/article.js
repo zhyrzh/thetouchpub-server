@@ -16,6 +16,7 @@ articleRoutes.get("/", async (req, res) => {
         .json({ success: true, message: "no articles found" });
     res.status(200).json(articles);
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ success: false, data: error, message: "server error" });
@@ -29,6 +30,7 @@ articleRoutes.get("/:articleId", async (req, res) => {
     const article = await getSpecificArticle(articleId);
     res.status(200).json(article);
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ success: false, data: error, message: "server error" });

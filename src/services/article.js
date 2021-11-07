@@ -28,7 +28,9 @@ module.exports.addArticle = async (articleDetails) => {
 module.exports.getAllArticles = async () => {
   const client = await pool.connect();
   try {
-    const { rows } = await client.query("SELECT * FROM articles");
+    const { rows } = await client.query(
+      "SELECT id, title, body, author, CONCAT(to_char(date_published, 'Month'), to_char(date_published, 'DD'),', ',to_char(date_published, 'YYYY')) AS date_published FROM articles"
+    );
     return rows;
   } catch (error) {
     throw error;
@@ -41,7 +43,7 @@ module.exports.getSpecificArticle = async (articleId) => {
   const client = await pool.connect();
   try {
     const { rows } = await client.query({
-      text: "SELECT * FROM articles WHERE id = $1",
+      text: "SELECT id, title, body, author, CONCAT(to_char(date_published, 'Month'), to_char(date_published, 'DD'),', ',to_char(date_published, 'YYYY')) AS date_published FROM articles WHERE id = $1",
       values: [articleId],
     });
     return rows[0];
