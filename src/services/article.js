@@ -24,3 +24,30 @@ module.exports.addArticle = async (articleDetails) => {
     await client.release();
   }
 };
+
+module.exports.getAllArticles = async () => {
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query("SELECT * FROM articles");
+    return rows;
+  } catch (error) {
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+module.exports.getSpecificArticle = async (articleId) => {
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query({
+      text: "SELECT * FROM articles WHERE id = $1",
+      values: [articleId],
+    });
+    return rows[0];
+  } catch (error) {
+    throw error;
+  } finally {
+    client.release();
+  }
+};

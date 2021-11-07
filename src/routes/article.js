@@ -1,18 +1,38 @@
 const articleRoutes = require("express").Router();
 
-const { addArticle } = require("../services/article");
+const {
+  addArticle,
+  getAllArticles,
+  getSpecificArticle,
+} = require("../services/article");
 
 // RETRIEVE all articles
-articleRoutes.get("/", (req, res) => {
+articleRoutes.get("/", async (req, res) => {
   try {
-  } catch (error) {}
+    const articles = await getAllArticles();
+    if (articles.length <= 0)
+      return res
+        .status(404)
+        .json({ success: true, message: "no articles found" });
+    res.status(200).json(articles);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, data: error, message: "server error" });
+  }
 });
 
 // RETRIEVE a specific article
-articleRoutes.get("/:article_id", (req, res) => {
-  const article_id = req.params.article_id;
+articleRoutes.get("/:articleId", async (req, res) => {
+  const articleId = req.params.articleId;
   try {
-  } catch (error) {}
+    const article = await getSpecificArticle(articleId);
+    res.status(200).json(article);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, data: error, message: "server error" });
+  }
 });
 
 // ADD or POST an article
