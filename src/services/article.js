@@ -43,7 +43,7 @@ module.exports.getSpecificArticle = async (articleId) => {
   const client = await pool.connect();
   try {
     const { rows } = await client.query({
-      text: "SELECT id, title, body, author, CONCAT(to_char(date_published, 'Month'), to_char(date_published, 'DD'),', ',to_char(date_published, 'YYYY')) AS date_published FROM articles WHERE id = $1",
+      text: "SELECT id, title, body, author, CONCAT(to_char(date_published, 'Month'), to_char(date_published, 'DD'),', ',to_char(date_published, 'YYYY'),' ', to_char(date_published, 'HH'),':',to_char(date_published, 'MM'),':',to_char(date_published, 'SS')) AS date_published FROM articles WHERE id = $1",
       values: [articleId],
     });
     return rows[0];
