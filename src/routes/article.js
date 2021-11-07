@@ -1,5 +1,7 @@
 const articleRoutes = require("express").Router();
 
+const { addArticle } = require("../services/article");
+
 // RETRIEVE all articles
 articleRoutes.get("/", (req, res) => {
   try {
@@ -14,12 +16,21 @@ articleRoutes.get("/:article_id", (req, res) => {
 });
 
 // ADD or POST an article
-articleRoutes.post("/", (req, res) => {
+articleRoutes.post("/", async (req, res) => {
   try {
-  } catch (error) {}
+    const addArticleRes = await addArticle(req.body);
+    if (!addArticleRes)
+      return res
+        .status(400)
+        .json({ success: false, message: "article upload failed" });
+    res.status(201).json({ success: true, data: addArticleRes });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "server error!" });
+  }
 });
 
-// UPDATES an article
+// UPDATE an article
 articleRoutes.get("/:article_id", (req, res) => {
   const article_id = req.params.article_id;
   try {
@@ -32,3 +43,5 @@ articleRoutes.get("/:article_id", (req, res) => {
   try {
   } catch (error) {}
 });
+
+module.exports = articleRoutes;
