@@ -17,6 +17,14 @@ articleRoutes.get("/:article_id", (req, res) => {
 
 // ADD or POST an article
 articleRoutes.post("/", async (req, res) => {
+  const { title, body, author, image } = req.body;
+
+  if (!title || !body || !author || !image) {
+    return res
+      .status(400)
+      .json({ success: false, message: "please provide all required fields" });
+  }
+
   try {
     const addArticleRes = await addArticle(req.body);
     if (!addArticleRes)
