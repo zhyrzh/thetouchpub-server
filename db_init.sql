@@ -1,7 +1,7 @@
-DROP DATABASE thetouchpub_db;
-CREATE DATABASE thetouchpub_db;
+-- DROP DATABASE thetouchpub_db;
+-- CREATE DATABASE thetouchpub_db;
 
-\c thetouchpub_db
+-- \c thetouchpub_db
 
 CREATE TABLE articles(
     article_id serial,
