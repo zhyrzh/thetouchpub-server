@@ -4,10 +4,16 @@ const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 const routes = require("./routes");
-
+const dayjs = require("dayjs");
+const customParseFormat = require("dayjs/plugin/customParseFormat");
+dayjs.extend(customParseFormat);
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50MB" }));
 app.use(routes);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  const date_now = dayjs();
+  console.log(dayjs("2021-11-09 09:44:08").format("MMM D, YYYY HH:MM:ss A"));
+});

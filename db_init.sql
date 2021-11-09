@@ -1,18 +1,18 @@
-\c postgres
-DROP DATABASE thetouchpub_db;
-CREATE DATABASE thetouchpub_db;
+-- \c postgres
+-- DROP DATABASE thetouchpub_db;
+-- CREATE DATABASE thetouchpub_db;
 
-\c thetouchpub_db
+-- \c thetouchpub_db
 
--- DROP TABLE articles;
--- DROP TABLE images;
+DROP TABLE IF EXISTS articles CASCADE;
+DROP TABLE images;
 
 CREATE TABLE articles(
     id serial,
     title text,
     body text,
     author varchar(200),
-    date_published timestamp default now(),
+    date_published timestamp,
     PRIMARY KEY(id)
 );
 
@@ -21,7 +21,34 @@ CREATE TABLE images(
     article_id int,
     image_url text,
     PRIMARY KEY(id),
-    FOREIGN KEY(article_id) REFERENCES articles(id) ON DELETE CASCADE
+    FOREIGN KEY(article_id) 
+        REFERENCES articles(id) 
+        ON DELETE CASCADE
 );
 
-SELECT a.id, a.title, a.body, a.author, CONCAT(to_char(a.date_published, 'Month'), to_char(a.date_published, 'DD'),', ',to_char(a.date_published, 'YYYY'),' ', to_char(a.date_published, 'HH'),':',to_char(a.date_published, 'MM'),':',to_char(a.date_published, 'SS')) AS date_published, i.image_url as image_url FROM articles a INNER JOIN images i ON a.id = i.article_id;
+CREATE TABLE articles_development(
+    id serial,
+    title text,
+    body text,
+    author varchar(200),
+    date_published timestamp,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE images_development(
+    id serial,
+    article_id int,
+    image_url text,
+    PRIMARY KEY(id),
+    FOREIGN KEY(article_id) 
+        REFERENCES articles(id) 
+        ON DELETE CASCADE
+);
+-- SELECT id, title, body, author, CONCAT(
+--     EXTRACT(SECOND FROM date_published)
+-- ) AS date_published 
+-- FROM articles;
+-- -- CREATE TABLE test_date(
+-- --     date_published date default now(),
+-- --     name varchar(100)
+-- -- );
