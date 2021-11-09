@@ -30,7 +30,7 @@ module.exports.addArticle = async (articleDetails) => {
       uploadedImage.push([+articleId, secure_url]);
     }
 
-    await client.query(insertImagesQry([uploadedImage]));
+    await client.query(insertImagesQry(uploadedImage));
     await client.query("COMMIT");
 
     return insertedArticleDetails[0];
