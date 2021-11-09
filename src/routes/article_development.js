@@ -8,7 +8,6 @@ const {
 
 // RETRIEVE all articles
 articleRoutes.get("/", async (req, res) => {
-  console.log("development route ni");
   try {
     const articles = await getAllArticles();
     if (articles.length <= 0)

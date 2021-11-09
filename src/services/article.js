@@ -16,7 +16,6 @@ module.exports.addArticle = async (articleDetails) => {
   const client = await pool.connect();
   try {
     // DATABASE TRANSACTION
-    console.log("kani gyapon");
     await client.query("BEGIN");
     const { rows: insertedArticleDetails } = await client.query(
       insertArticleQry([title, body, author, date_published])

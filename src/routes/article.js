@@ -49,7 +49,6 @@ articleRoutes.post("/", async (req, res) => {
 
   try {
     const addArticleRes = await addArticle(req.body);
-    console.log(addArticleRes, "is added");
     if (!addArticleRes)
       return res
         .status(400)
