@@ -4,7 +4,7 @@ const {
   addArticle,
   getAllArticles,
   getSpecificArticle,
-} = require("../services/article");
+} = require("../services/article_development");
 
 // RETRIEVE all articles
 articleRoutes.get("/", async (req, res) => {
