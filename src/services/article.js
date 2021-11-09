@@ -16,9 +16,10 @@ module.exports.addArticle = async (articleDetails) => {
   const client = await pool.connect();
   try {
     // DATABASE TRANSACTION
+    console.log("kani gyapon");
     await client.query("BEGIN");
     const { rows: insertedArticleDetails } = await client.query(
-      insertArticleQry(title, body, author, date_published)
+      insertArticleQry([title, body, author, date_published])
     );
     const articleId = insertedArticleDetails[0].id;
 
@@ -29,7 +30,7 @@ module.exports.addArticle = async (articleDetails) => {
       uploadedImage.push([+articleId, secure_url]);
     }
 
-    await client.query(insertImagesQry(uploadedImage));
+    await client.query(insertImagesQry([uploadedImage]));
     await client.query("COMMIT");
 
     return insertedArticleDetails[0];

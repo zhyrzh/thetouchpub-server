@@ -1,6 +1,7 @@
 require("dotenv").config();
 const format = require("pg-format");
 module.exports.insertArticleQry = (values, environment) => {
+  console.log(values, "values");
   const table =
     environment !== "development" ? "articles" : "articles_development";
   const text = `INSERT INTO ${table} (title, body, author, date_published) VALUES ($1, $2, $3, $4) returning id`;
