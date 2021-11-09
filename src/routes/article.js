@@ -41,7 +41,7 @@ articleRoutes.get("/:articleId", async (req, res) => {
 articleRoutes.post("/", async (req, res) => {
   const { title, body, author, image } = req.body;
 
-  if (!title || !body || !author || !image) {
+  if (!title || !body || !author || image.length <= 0) {
     return res
       .status(400)
       .json({ success: false, message: "please provide all required fields" });
