@@ -28,6 +28,7 @@ articleRoutes.get("/:articleId", async (req, res) => {
   const articleId = req.params.articleId;
   try {
     const article = await getSpecificArticle(articleId);
+
     res.status(200).json(article);
   } catch (error) {
     console.log(error);

@@ -42,6 +42,7 @@ module.exports.addArticle = async (articleDetails) => {
 };
 
 module.exports.getAllArticles = async () => {
+  // DATABASE TRANSACTION
   const client = await pool.connect();
   try {
     const { rows: articleRows } = await client.query(
@@ -71,11 +72,22 @@ module.exports.getAllArticles = async () => {
 module.exports.getSpecificArticle = async (articleId) => {
   const client = await pool.connect();
   try {
-    const { rows } = await client.query({
-      text: "SELECT id, title, body, author, CONCAT(to_char(date_published, 'Month'), to_char(date_published, 'DD'),', ',to_char(date_published, 'YYYY'),' ', to_char(date_published, 'HH'),':',to_char(date_published, 'MM'),':',to_char(date_published, 'SS')) AS date_published FROM articles WHERE id = $1",
+    const { rows: articleRows } = await client.query({
+      text: "SELECT * FROM articles WHERE id = $1",
       values: [articleId],
     });
-    return rows[0];
+
+    const { rows: imageRows } = await client.query({
+      text: "SELECT * FROM images WHERE article_id = $1",
+      values: [articleId],
+    });
+
+    const selectedArticle = articleRows[0];
+
+    return {
+      ...selectedArticle,
+      images: imageRows,
+    };
   } catch (error) {
     throw error;
   } finally {

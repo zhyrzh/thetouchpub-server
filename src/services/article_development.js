@@ -41,6 +41,33 @@ module.exports.addArticle = async (articleDetails) => {
   }
 };
 
+module.exports.getSpecificArticle = async (articleId) => {
+  const client = await pool.connect();
+  console.log("hittedf");
+  try {
+    const { rows: articleRows } = await client.query({
+      text: "SELECT * FROM articles_development WHERE id = $1",
+      values: [articleId],
+    });
+
+    const { rows: imageRows } = await client.query({
+      text: "SELECT * FROM images_development WHERE article_id = $1",
+      values: [articleId],
+    });
+
+    const selectedArticle = articleRows[0];
+
+    return {
+      ...selectedArticle,
+      images: imageRows,
+    };
+  } catch (error) {
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
 module.exports.getAllArticles = async () => {
   const client = await pool.connect();
   try {
