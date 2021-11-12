@@ -43,7 +43,7 @@ module.exports.addArticle = async (articleDetails) => {
 
 module.exports.getSpecificArticle = async (articleId) => {
   const client = await pool.connect();
-  console.log("hittedf");
+
   try {
     const { rows: articleRows } = await client.query({
       text: "SELECT * FROM articles_development WHERE id = $1",
