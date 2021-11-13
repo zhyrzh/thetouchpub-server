@@ -16,7 +16,6 @@ app.use(
       "https://thetouchpub.netlify.app",
       "https://thetouchpublication.site",
     ],
-    credentials: true,
   })
 );
 app.use(session);
