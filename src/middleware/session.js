@@ -17,6 +17,4 @@ module.exports = session({
     sameSite: true,
   },
   secret: session_secret,
-  resave: false,
-  saveUninitialized: false,
 });
