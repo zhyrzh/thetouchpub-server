@@ -26,7 +26,11 @@ authRouter.post("/", (req, res) => {
   req.session.thetouchpub = username;
   return res
     .status(200)
-    .json({ success: true, message: "you are now logged in" });
+    .json({
+      success: true,
+      message: "you are now logged in",
+      user: req.session.thetouchpub,
+    });
 });
 
 authRouter.delete("/", (req, res) => {
