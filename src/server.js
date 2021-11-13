@@ -12,9 +12,9 @@ dayjs.extend(customParseFormat);
 app.use(
   cors({
     origin:
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : "https://thetouchpub.netlify.app",
+      process.env.NODE_ENV === "production"
+        ? "https://thetouchpub.netlify.app"
+        : "http://localhost:3000",
     allowedHeaders: [
       "Access-Control-Allow-Origin",
       "Content-Type",
