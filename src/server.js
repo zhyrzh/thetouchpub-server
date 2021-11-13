@@ -7,6 +7,7 @@ const routes = require("./routes");
 const dayjs = require("dayjs");
 const customParseFormat = require("dayjs/plugin/customParseFormat");
 const session = require("./middleware/session");
+const cookieParser = require("cookie-parser");
 dayjs.extend(customParseFormat);
 
 app.set("trust proxy", 1);
@@ -22,6 +23,7 @@ app.use(
   })
 );
 app.use(session);
+app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50MB" }));
 app.use(routes);
