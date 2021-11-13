@@ -3,8 +3,11 @@ const verifyUser = require("../middleware/verify-user");
 
 // VERIFY user
 authRouter.get("/", verifyUser, (req, res) => {
-  req.hostname;
-  res.status(200).json({ success: true, message: "user verified" });
+  res.status(200).json({
+    success: true,
+    message: "user verified",
+    user: req.session.thetouchpub,
+  });
 });
 
 // LOGIN user
@@ -24,13 +27,11 @@ authRouter.post("/", (req, res) => {
       .json({ success: false, message: "invalid credentials" });
 
   req.session.thetouchpub = username;
-  return res
-    .status(200)
-    .json({
-      success: true,
-      message: "you are now logged in",
-      user: req.session.thetouchpub,
-    });
+  return res.status(200).json({
+    success: true,
+    message: "you are now logged in",
+    user: req.session.thetouchpub,
+  });
 });
 
 authRouter.delete("/", (req, res) => {

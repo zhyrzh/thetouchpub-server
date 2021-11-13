@@ -30,6 +30,5 @@ app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  const date_now = dayjs();
   console.log(dayjs("2021-11-09 09:44:08").format("MMM D, YYYY HH:MM:ss A"));
 });
