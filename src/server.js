@@ -11,7 +11,7 @@ dayjs.extend(customParseFormat);
 
 app.use(
   cors({
-    origin: "&",
+    origin: "*",
     credentials: true,
   })
 );
