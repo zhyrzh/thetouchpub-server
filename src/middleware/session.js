@@ -13,12 +13,6 @@ module.exports = session({
   }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 365,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
-    domain:
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : "https://thetouchpub.netlify.app",
   },
   secret: session_secret,
   resave: false,
