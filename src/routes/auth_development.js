@@ -3,6 +3,7 @@ const verifyUser = require("../middleware/verify-user");
 
 // VERIFY user
 authRouter.get("/", verifyUser, (req, res) => {
+  req.hostname;
   res.status(200).json({ success: true, message: "user verified" });
 });
 
