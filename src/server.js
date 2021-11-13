@@ -13,10 +13,11 @@ app.set("trust proxy", 1);
 app.enable("trust proxy");
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://thetouchpub.netlify.app"
-        : "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://thetouchpub.netlify.app",
+      "https://thetouchpublication.site",
+    ],
     credentials: true,
   })
 );
