@@ -10,6 +10,7 @@ const session = require("./middleware/session");
 dayjs.extend(customParseFormat);
 
 app.set("trust proxy", 1);
+app.enable("trust proxy");
 app.use(
   cors({
     origin: [
