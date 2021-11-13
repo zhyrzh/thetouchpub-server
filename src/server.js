@@ -9,6 +9,7 @@ const customParseFormat = require("dayjs/plugin/customParseFormat");
 const session = require("./middleware/session");
 dayjs.extend(customParseFormat);
 
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: [
