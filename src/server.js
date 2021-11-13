@@ -16,6 +16,7 @@ app.use(
         ? "http://localhost:3000"
         : "https://thetouchpub.netlify.app",
     allowedHeaders: [
+      "Access-Control-Allow-Origin",
       "Content-Type",
       "Authorization",
       "X-Requested-With",
@@ -24,6 +25,7 @@ app.use(
       "Set-Cookie",
     ],
     exposedHeaders: [
+      "Access-Control-Allow-Origin",
       "Content-Type",
       "Authorization",
       "X-Requested-With",
