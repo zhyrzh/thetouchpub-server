@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-  console.log(req.session, "bump");
+  console.log(req.session.thetouchpub, "bump");
   if (!req.session.admin)
     return res
       .status(401)
