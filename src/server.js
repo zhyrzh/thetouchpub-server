@@ -11,7 +11,11 @@ dayjs.extend(customParseFormat);
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://thetouchpub.netlify.app"],
+    origin: [
+      "http://localhost:3000",
+      "https://thetouchpub.netlify.app",
+      "https://thetouchpublication.site",
+    ],
     credentials: true,
   })
 );
