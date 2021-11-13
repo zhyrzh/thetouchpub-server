@@ -23,7 +23,7 @@ authRouter.post("/", (req, res) => {
       .status(400)
       .json({ success: false, message: "invalid credentials" });
 
-  req.session.admin = username;
+  req.session.thetouchpub = username;
   return res
     .status(200)
     .json({ success: true, message: "you are now logged in" });
