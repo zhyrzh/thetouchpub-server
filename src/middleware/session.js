@@ -15,6 +15,7 @@ module.exports = session({
     maxAge: 1000 * 60 * 60 * 24 * 365,
     secure: process.env.NODE_ENV === "production",
     sameSite: "none",
+    httpOnly: true,
   },
   secret: session_secret,
   resave: false,
