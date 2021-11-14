@@ -1,8 +1,8 @@
-const authRouter = require("express").Router();
+const authDevelopmentRouter = require("express").Router();
 const verifyUser = require("../middleware/verify-user");
 
 // VERIFY user
-authRouter.get("/", verifyUser, (req, res) => {
+authDevelopmentRouter.get("/", verifyUser, (req, res) => {
   res.status(200).json({
     success: true,
     message: "user verified",
@@ -11,7 +11,7 @@ authRouter.get("/", verifyUser, (req, res) => {
 });
 
 // LOGIN user
-authRouter.post("/", (req, res) => {
+authDevelopmentRouter.post("/", (req, res) => {
   const { username, password } = req.body;
   if (!username || !password)
     return res
@@ -34,7 +34,7 @@ authRouter.post("/", (req, res) => {
   });
 });
 
-authRouter.delete("/", (req, res) => {
+authDevelopmentRouter.delete("/", (req, res) => {
   req.session.destroy((error) => {
     if (error)
       return res.json({ success: false, message: "something went wrong" });
@@ -43,4 +43,4 @@ authRouter.delete("/", (req, res) => {
   });
 });
 
-module.exports = authRouter;
+module.exports = authDevelopmentRouter;
