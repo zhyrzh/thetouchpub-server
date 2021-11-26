@@ -46,7 +46,7 @@ module.exports.getAllArticles = async () => {
   const client = await pool.connect();
   try {
     const { rows: articleRows } = await client.query(
-      "SELECT id, title, body, author, date_published FROM articles"
+      "SELECT id, title, body, author, date_published FROM articles ORDER BY date_published DESC"
     );
 
     const { rows: imageRows } = await client.query("SELECT * FROM images");
